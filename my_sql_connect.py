@@ -18,16 +18,20 @@ def do_query(connection, query):
 # main
 try:
     # aprire la connessione
-    connection = open_connection("root", "root", "sneakers")
+    connection = open_connection("root", "root", "autonoleggio")
+    # comporre la query
+    query = """SELECT id,marca,modello,colore
+                FROM auto"""
+    query = """select count(*), marca
+                from auto
+                group by marca""";
     # eseguire la query
-    query = """select brand,model,buyer_region from orders limit 1000"""
     result = do_query(connection, query)
     # visualizzare il resultset
     for row in result:
-        print(row[1])
+        print(row)
 
-# chiudere la connessione
-
+    # chiudere la connessione
 except mysql.connector.Error as e:
     print(e)
 
