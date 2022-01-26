@@ -1,5 +1,5 @@
 import mysql.connector
-#db connectionn
+#db connectionnn
 def open_connection(user, password, database):
     connection = mysql.connector.connect(user=user, password=password, host='localhost', database=database)
     return connection
