@@ -3,6 +3,7 @@ import mysql.connector  # pip install mysql-connector-python
 
 # db connectionnn
 def open_connection(user, password, database):
+    print("opening connection to " + database )
     connection = mysql.connector.connect(user=user, password=password, host='localhost', database=database)
     return connection
 
@@ -42,22 +43,37 @@ def show_pie_chart(result):
     plt.pie(values_ar, labels=labels_ar)
     plt.show()
 
-    # main
 
 
+def insert_auto():
+    marca= input("marca :")
+    modello=input("modello : ")
+    colore=input("colore : ")
+    targa=input("targa : " )
+    data_acquisto=input("data_acquisto : ")
+    id_categoria=input("id_categoria : ")
+    query = f"""insert into auto(marca,modello,colore,targa,data_acquisto,id_categoria)
+    VALUES ("{marca}","{modello}","{colore}","{targa}","{data_acquisto}",{id_categoria}) """
+    print(query)
+    return query
+
+# main
 try:
-    # aprire la connessione
     connection = open_connection("root", "root", "autonoleggio")
-    # comporre la query
+    #INSERIMENTO AUTO
+    # query = insert_auto()
+    # print("QUERY: "+ query)
+
+    # result = do_query(connection, query)
+
+    #PIE CHART
     query = """select marca, count(*) 
-                from auto
-                group by marca""";
-    # eseguire la query
+                        from auto
+                        group by marca"""
     result = do_query(connection, query)
     # visualizzare il resultset
     for row in result:
         print(row)
-
     # show_bar_chart(result)
     show_pie_chart(result)
     # chiudere la connessione
