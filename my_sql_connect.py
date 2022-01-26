@@ -1,4 +1,5 @@
-import mysql.connector #pip install mysql-connector-python
+import mysql.connector  # pip install mysql-connector-python
+
 
 # db connectionnn
 def open_connection(user, password, database):
@@ -31,7 +32,6 @@ def do_query(connection, query):
 #     plt.yticks(ys)
 #     plt.show()
 
-
 def show_pie_chart(result):
     import matplotlib.pyplot as plt
     values_ar = []
@@ -43,6 +43,8 @@ def show_pie_chart(result):
     plt.show()
 
     # main
+
+
 try:
     # aprire la connessione
     connection = open_connection("root", "root", "autonoleggio")
@@ -56,7 +58,7 @@ try:
     for row in result:
         print(row)
 
-    #show_bar_chart(result)
+    # show_bar_chart(result)
     show_pie_chart(result)
     # chiudere la connessione
 except mysql.connector.Error as e:
