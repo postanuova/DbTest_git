@@ -1,15 +1,12 @@
 import mysql.connector
 
-
 def open_connection(user, password, database):
     connection = mysql.connector.connect(user=user, password=password, host='localhost', database=database)
     return connection
 
-
 def close_connection(connection):
     connection.close()
     print("connection closed")
-
 
 def do_query(connection, query):
     with connection.cursor() as cursor:
@@ -18,14 +15,12 @@ def do_query(connection, query):
         connection.commit()
         return result
 
-
 # main
 try:
     # aprire la connessione
     connection = open_connection("root", "root", "sneakers")
     # eseguire la query
     query = """select brand,model,buyer_region from orders limit 1000"""
-    # query = """insert into delete_me values ("christo")"""
     result = do_query(connection, query)
     # visualizzare il resultset
     for row in result:
